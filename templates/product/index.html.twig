@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+
+<h1>Products</h1>
+
+<a href="{{ path('app_product_new') }}">Create a new product</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Product Line</th>
+            <th>Product Vendor</th>
+            <th>Product Description</th>
+            <th>Quantity In Stock</th>
+            <th>Buy Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.productCode }}</td>
+            <td>
+                <a href="{{ path('app_product_id', {'id': product.id}) }}">{{ product.productName }}</a>
+            </td>
+            <td>{{ product.productLine }}</td>
+            <td>{{ product.productVendor }}</td>
+            <td>{% if product.productDescription|length > 100 %}{{ product.productDescription|slice(0, 100) }}...{% else %}{{ product.productDescription }}{% endif %}</td>
+            <td>{{ product.quantityInStock }}</td>
+            <td>{{ product.buyPrice }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
